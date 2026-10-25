@@ -170,3 +170,95 @@
 // Console.WriteLine($"{percent:P0}");
 // Console.WriteLine($"{number:X}");
 
+
+// ## Итоговая задача. Простой генератор списка покупок
+using System;
+using System.Globalization;
+using System.Text;
+
+CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
+
+Console.Write("Введите количество товаров: ");
+if (!int.TryParse(Console.ReadLine(), out int count) || count <= 0)
+{
+    Console.WriteLine("Некорректное количество товаров.");
+    return;
+}
+
+string[] names = new string[count];
+double[] prices = new double[count];
+int[] quantities = new int[count];
+double total = 0;
+int index = 0;
+
+while (index < count)
+{
+    Console.Write($"Товар #{index + 1} (название,цена,количество): ");
+    string line = Console.ReadLine() ?? "";
+
+    if (TryParseProduct(line, out string name, out double price, out int qty))
+    {
+        names[index] = name;
+        prices[index] = price;
+        quantities[index] = qty;
+        total += price * qty;
+        index++;
+    }
+    else
+    {
+        Console.WriteLine("Ошибка: неверный формат. Попробуйте снова.");
+    }
+}
+
+string report = BuildReport(names, prices, quantities, total);
+Console.WriteLine();
+Console.WriteLine(report);
+
+
+static bool TryParseProduct(string line, out string name, out double price, out int quantity)
+{
+    name = "";
+    price = 0;
+    quantity = 0;
+
+    string[] parts = line.Split(',');
+    if (parts.Length != 3) return false;
+
+    for (int i = 0; i < parts.Length; i++)
+        parts[i] = parts[i].Trim();
+
+    if (parts[0].Length == 0) return false;
+
+    if (!double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture, out price))
+        return false;
+    if (price < 0) return false;
+
+    if (!int.TryParse(parts[2], NumberStyles.Integer, CultureInfo.InvariantCulture, out quantity))
+        return false;
+    if (quantity <= 0) return false;
+
+    name = parts[0];
+    return true;
+}
+
+static string BuildReport(string[] names, double[] prices, int[] quantities, double total)
+{
+    StringBuilder sb = new StringBuilder();
+
+    sb.AppendLine(new string('-', 62));
+    sb.AppendLine($"{"Название",-20} {"Цена",10} {"Кол-во",8} {"Стоимость",12}");
+    sb.AppendLine(new string('-', 62));
+
+    for (int i = 0; i < names.Length; i++)
+    {
+        double cost = prices[i] * quantities[i];
+        sb.AppendLine($"{names[i],-20} {prices[i],10:F2} {quantities[i],8} {cost,12:F2}");
+    }
+
+    sb.AppendLine(new string('-', 62));
+    sb.AppendLine($"{"ИТОГО",-20} {"",10} {"",8} {total,12:F2}");
+    sb.AppendLine(new string('-', 62));
+
+    return sb.ToString();
+}
