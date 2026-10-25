@@ -172,93 +172,133 @@
 
 
 // ## Итоговая задача. Простой генератор списка покупок
+// using System;
+// using System.Globalization;
+// using System.Text;
+
+// CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
+// CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
+
+// Console.Write("Введите количество товаров: ");
+// if (!int.TryParse(Console.ReadLine(), out int count) || count <= 0)
+// {
+//     Console.WriteLine("Некорректное количество товаров.");
+//     return;
+// }
+
+// string[] names = new string[count];
+// double[] prices = new double[count];
+// int[] quantities = new int[count];
+// double total = 0;
+// int index = 0;
+
+// while (index < count)
+// {
+//     Console.Write($"Товар #{index + 1} (название,цена,количество): ");
+//     string line = Console.ReadLine() ?? "";
+
+//     if (TryParseProduct(line, out string name, out double price, out int qty))
+//     {
+//         names[index] = name;
+//         prices[index] = price;
+//         quantities[index] = qty;
+//         total += price * qty;
+//         index++;
+//     }
+//     else
+//     {
+//         Console.WriteLine("Ошибка: неверный формат. Попробуйте снова.");
+//     }
+// }
+
+// string report = BuildReport(names, prices, quantities, total);
+// Console.WriteLine();
+// Console.WriteLine(report);
+
+
+// static bool TryParseProduct(string line, out string name, out double price, out int quantity)
+// {
+//     name = "";
+//     price = 0;
+//     quantity = 0;
+
+//     string[] parts = line.Split(',');
+//     if (parts.Length != 3) return false;
+
+//     for (int i = 0; i < parts.Length; i++)
+//         parts[i] = parts[i].Trim();
+
+//     if (parts[0].Length == 0) return false;
+
+//     if (!double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture, out price))
+//         return false;
+//     if (price < 0) return false;
+
+//     if (!int.TryParse(parts[2], NumberStyles.Integer, CultureInfo.InvariantCulture, out quantity))
+//         return false;
+//     if (quantity <= 0) return false;
+
+//     name = parts[0];
+//     return true;
+// }
+
+// static string BuildReport(string[] names, double[] prices, int[] quantities, double total)
+// {
+//     StringBuilder sb = new StringBuilder();
+
+//     sb.AppendLine(new string('-', 62));
+//     sb.AppendLine($"{"Название",-20} {"Цена",10} {"Кол-во",8} {"Стоимость",12}");
+//     sb.AppendLine(new string('-', 62));
+
+//     for (int i = 0; i < names.Length; i++)
+//     {
+//         double cost = prices[i] * quantities[i];
+//         sb.AppendLine($"{names[i],-20} {prices[i],10:F2} {quantities[i],8} {cost,12:F2}");
+//     }
+
+//     sb.AppendLine(new string('-', 62));
+//     sb.AppendLine($"{"ИТОГО",-20} {"",10} {"",8} {total,12:F2}");
+//     sb.AppendLine(new string('-', 62));
+
+//     return sb.ToString();
+// }
+
+
+
+// ## Самостоятельные задания (по желанию)
+
+// ### ★ Телефон по шаблону
+
 using System;
-using System.Globalization;
-using System.Text;
 
-CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
-CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
+Console.Write("Введите номер телефона (11 цифр без пробелов): ");
+string input = Console.ReadLine() ?? "";
 
-Console.Write("Введите количество товаров: ");
-if (!int.TryParse(Console.ReadLine(), out int count) || count <= 0)
+input = input.Trim();
+
+if (input.Length != 11)
 {
-    Console.WriteLine("Некорректное количество товаров.");
-    return;
+    Console.WriteLine("Ошибка: номер должен состоять ровно из 11 цифр.");
 }
-
-string[] names = new string[count];
-double[] prices = new double[count];
-int[] quantities = new int[count];
-double total = 0;
-int index = 0;
-
-while (index < count)
+else
 {
-    Console.Write($"Товар #{index + 1} (название,цена,количество): ");
-    string line = Console.ReadLine() ?? "";
-
-    if (TryParseProduct(line, out string name, out double price, out int qty))
+    bool isDigitsOnly = true;
+    for (int i = 0; i < input.Length; i++)
     {
-        names[index] = name;
-        prices[index] = price;
-        quantities[index] = qty;
-        total += price * qty;
-        index++;
+        if (!char.IsDigit(input[i]))
+        {
+            isDigitsOnly = false;
+            break;
+        }
+    }
+
+    if (!isDigitsOnly)
+    {
+        Console.WriteLine("Ошибка: номер должен содержать только цифры.");
     }
     else
     {
-        Console.WriteLine("Ошибка: неверный формат. Попробуйте снова.");
+        string formattedNumber = $"+7 ({input.Substring(1, 3)}) {input.Substring(4, 3)}-{input.Substring(7, 2)}-{input.Substring(9, 2)}";
+        Console.WriteLine($"Отформатированный номер: {formattedNumber}");
     }
-}
-
-string report = BuildReport(names, prices, quantities, total);
-Console.WriteLine();
-Console.WriteLine(report);
-
-
-static bool TryParseProduct(string line, out string name, out double price, out int quantity)
-{
-    name = "";
-    price = 0;
-    quantity = 0;
-
-    string[] parts = line.Split(',');
-    if (parts.Length != 3) return false;
-
-    for (int i = 0; i < parts.Length; i++)
-        parts[i] = parts[i].Trim();
-
-    if (parts[0].Length == 0) return false;
-
-    if (!double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture, out price))
-        return false;
-    if (price < 0) return false;
-
-    if (!int.TryParse(parts[2], NumberStyles.Integer, CultureInfo.InvariantCulture, out quantity))
-        return false;
-    if (quantity <= 0) return false;
-
-    name = parts[0];
-    return true;
-}
-
-static string BuildReport(string[] names, double[] prices, int[] quantities, double total)
-{
-    StringBuilder sb = new StringBuilder();
-
-    sb.AppendLine(new string('-', 62));
-    sb.AppendLine($"{"Название",-20} {"Цена",10} {"Кол-во",8} {"Стоимость",12}");
-    sb.AppendLine(new string('-', 62));
-
-    for (int i = 0; i < names.Length; i++)
-    {
-        double cost = prices[i] * quantities[i];
-        sb.AppendLine($"{names[i],-20} {prices[i],10:F2} {quantities[i],8} {cost,12:F2}");
-    }
-
-    sb.AppendLine(new string('-', 62));
-    sb.AppendLine($"{"ИТОГО",-20} {"",10} {"",8} {total,12:F2}");
-    sb.AppendLine(new string('-', 62));
-
-    return sb.ToString();
 }
