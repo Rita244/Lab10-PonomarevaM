@@ -121,3 +121,52 @@
 // bool endsWithExclamation = trimmedInput.EndsWith("!");
 // Console.WriteLine($"Заканчивается восклицательным знаком: {(endsWithExclamation ? "да" : "нет")}");
 
+
+// ### Шаг 8. `+=` и StringBuilder
+
+// using System.Text;
+// string result = "";
+// for(int i = 1; i <= 5; i++)
+// {
+//     result += i + " ";
+// }
+
+
+// StringBuilder sb = new();
+// for(int i = 1; i <= 5; i++)
+// {
+//     sb.Append(i).Append(" ");
+// }
+
+// string[] students = ["Иван", "Анна", "Пётр"];
+// StringBuilder report = new();
+// report.AppendLine("=== ОТЧЁТ ===")
+//      .AppendLine("Группа: 2ИС-1")
+//      .AppendLine($"Студентов: {students.Length}");
+
+// for(int i = 0; i < students.Length; i++)
+// {
+//     report.AppendLine($"{i+1}. {students[i]}");
+// }
+
+
+// ### Шаг 10. Таблица товаров
+
+
+// string[] products = ["Хлеб", "Молоко", "Ноутбук"];
+// double[] prices = [45, 89.5, 65999.99];
+
+// Console.WriteLine("№   Товар               Цена");
+// Console.WriteLine(new string('-', 28));
+
+// for(int i = 0; i < products.Length; i++)
+// {
+//     Console.WriteLine($"{(i+1):D2}  {products[i],-15}{prices[i],10:N2}");
+// }
+
+// double percent = 0.256;
+// int number = 255;
+
+// Console.WriteLine($"{percent:P0}");
+// Console.WriteLine($"{number:X}");
+
