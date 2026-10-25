@@ -1,0 +1,15 @@
+C:\Users\ASUS\Documents\Lab10-P\bin\Debug\net10.0\Lab10-P.exe
+C:\Users\ASUS\Documents\Lab10-P\bin\Debug\net10.0\Lab10-P.deps.json
+C:\Users\ASUS\Documents\Lab10-P\bin\Debug\net10.0\Lab10-P.runtimeconfig.json
+C:\Users\ASUS\Documents\Lab10-P\bin\Debug\net10.0\Lab10-P.dll
+C:\Users\ASUS\Documents\Lab10-P\bin\Debug\net10.0\Lab10-P.pdb
+C:\Users\ASUS\Documents\Lab10-P\obj\Debug\net10.0\Lab10-P.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ASUS\Documents\Lab10-P\obj\Debug\net10.0\Lab10-P.AssemblyInfoInputs.cache
+C:\Users\ASUS\Documents\Lab10-P\obj\Debug\net10.0\Lab10-P.AssemblyInfo.cs
+C:\Users\ASUS\Documents\Lab10-P\obj\Debug\net10.0\Lab10-P.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\Documents\Lab10-P\obj\Debug\net10.0\Lab10-P.sourcelink.json
+C:\Users\ASUS\Documents\Lab10-P\obj\Debug\net10.0\Lab10-P.dll
+C:\Users\ASUS\Documents\Lab10-P\obj\Debug\net10.0\refint\Lab10-P.dll
+C:\Users\ASUS\Documents\Lab10-P\obj\Debug\net10.0\Lab10-P.pdb
+C:\Users\ASUS\Documents\Lab10-P\obj\Debug\net10.0\Lab10-P.genruntimeconfig.cache
+C:\Users\ASUS\Documents\Lab10-P\obj\Debug\net10.0\ref\Lab10-P.dll
